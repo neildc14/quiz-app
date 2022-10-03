@@ -1,10 +1,15 @@
-import React, { useReducer, useEffect, useState } from "react";
+import React, { useReducer, useEffect, useState, lazy, Suspense } from "react";
 import axios from "axios";
-import Options from "../components/Options";
+// import Options from "../components/Options";
 import Header from "./Header";
+
+const Categories = lazy(() => import("../components/Categories"));
+const Difficulties = lazy(() => import("../components/Difficulties"));
+const Limit = lazy(() => import("../components/Limit"));
 
 export const CategoriesContext = React.createContext();
 export const DifficultiesContext = React.createContext();
+export const LimitContext = React.createContext();
 
 const initialState = {
   categories: [],
@@ -47,6 +52,7 @@ function QuizComponent() {
   const [loading, setLoading] = useState(true);
   const [tags, setTags] = useState([]);
   const [difficulty, setDifficulty] = useState("easy");
+  const [limit, setLimit] = useState(5);
 
   useEffect(() => {
     axios
@@ -72,31 +78,45 @@ function QuizComponent() {
 
   console.log(tags);
 
+  //difficulty component
   const setDifficultyHandler = (e) => {
     setDifficulty(e.target.value);
   };
 
   console.log(difficulty);
 
+  //limit component
+  const changeLimit = (e) => {
+    setLimit(e.target.value);
+  };
+
+  console.log(limit);
+
   return (
     <div>
       <Header />
-      <CategoriesContext.Provider
-        value={{
-          loading,
-          categories,
-          tags,
-          handleCheck,
-        }}
-      >
-        <DifficultiesContext.Provider
-          value={{
-            setDifficultyHandler,
-          }}
-        >
-          <Options />
-        </DifficultiesContext.Provider>
-      </CategoriesContext.Provider>
+      <Suspense>
+        <div className="options">
+          <CategoriesContext.Provider
+            value={{
+              loading,
+              categories,
+              tags,
+              handleCheck,
+            }}
+          >
+            <Categories />
+          </CategoriesContext.Provider>
+          <DifficultiesContext.Provider
+            value={{ difficulty, setDifficultyHandler }}
+          >
+            <Difficulties />
+          </DifficultiesContext.Provider>
+          <LimitContext.Provider value={{ limit, setLimit, changeLimit }}>
+            <Limit />
+          </LimitContext.Provider>
+        </div>
+      </Suspense>
     </div>
   );
 }
