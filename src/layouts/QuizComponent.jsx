@@ -1,6 +1,7 @@
 import React, { useReducer, useEffect } from "react";
 import axios from "axios";
 import Options from "../components/Options";
+import owl from "../assets/images/owl.jpg";
 
 const initialState = {
   categories: [],
@@ -42,6 +43,9 @@ function QuizComponent() {
   return (
     <div>
       <header>
+        <div className="image_container">
+          <img className="image_logo" src={owl} alt="owl" />
+        </div>
         <h1 className="logo">QUIZ APP</h1>
       </header>
       <Options />

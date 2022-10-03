@@ -1,18 +1,17 @@
 import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 
-function SelectOptions(props) {
-  const { tags, categories, handleCheck, loading } = props;
+function SelectCategory(props) {
+  const { tags, categories, handleCheck, loading, setHidden } = props;
 
   useEffect(() => {
     const checkboxes = document.querySelectorAll(".checkbox");
     checkboxes.forEach((checkbox) => {
-      console.log(checkbox.dataset.tags);
       if (tags.includes(checkbox.dataset.tags)) {
         checkbox.checked = true;
       }
     });
-  }, []);
+  }, [tags]);
 
   let categoryList = [];
   for (const [key, topics] of Object.entries(categories)) {
@@ -39,10 +38,20 @@ function SelectOptions(props) {
 
   return ReactDOM.createPortal(
     <>
-      {loading ? null : <div className="select_options"> {categoryList}</div>}
+      {loading ? null : (
+        <div className="select_options">
+          <span
+            className="material-symbols-outlined close_btn"
+            onClick={setHidden}
+          >
+            close
+          </span>
+          {categoryList}
+        </div>
+      )}
     </>,
     portal
   );
 }
 
-export default SelectOptions;
+export default SelectCategory;

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import SelectOptions from "./SelectOptions";
+import SelectCategory from "./SelectCategory";
+
+export const tagsFromCategories = [];
 
 function Categories() {
   const [isHidden, setHidden] = useState(true);
@@ -21,6 +23,7 @@ function Categories() {
   const handleCheck = (e) => {
     if (e.target.checked === true) {
       setTags([...tags, e.target.dataset.tags]);
+      tagsFromCategories.push(e.target.dataset.tags);
     } else {
       unCheck(e);
     }
@@ -28,24 +31,32 @@ function Categories() {
 
   const unCheck = (e) => {
     setTags([...tags.filter((tag) => tag !== e.target.dataset.tags)]);
+    console.log(
+      tagsFromCategories.filter((tag) => tag !== e.target.dataset.tags)
+    );
   };
 
+  console.log(tagsFromCategories);
   return (
     <div className="category">
-      <div className="category_button" onClick={() => setHidden(!isHidden)}>
+      <button
+        className="category_button option_button"
+        onClick={() => setHidden(!isHidden)}
+      >
         Select Categories
         <span className="material-symbols-outlined category_button_arrow">
           chevron_right
         </span>
-      </div>
+      </button>
       {isHidden ? (
         ""
       ) : (
-        <SelectOptions
+        <SelectCategory
           loading={loading}
           categories={categories}
           handleCheck={handleCheck}
           tags={tags}
+          setHidden={() => setHidden(true)}
         />
       )}
     </div>

@@ -5,6 +5,16 @@
   font-family: "Roboto", sans-serif;
 }
 
+::selection {
+  color: none;
+  background: none;
+}
+
+::-moz-selection {
+  color: none;
+  background: none;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -20,9 +30,18 @@ a {
 }
 
 header {
-  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
 }
 
+.image_logo {
+  height: 5rem;
+  width: 5rem;
+  text-align: center;
+}
 .logo {
   text-align: center;
   font-size: 3rem;
@@ -35,29 +54,84 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
 }
 
-.category_button {
+.category {
+  position: relative;
+  z-index: 1;
+}
+.option_button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 220px;
+  width: 250px;
+  outline: none;
+  border: none;
   padding: 0.5rem 1rem;
   background-color: violet;
   cursor: pointer;
 }
 
+.option_button:active,
+.option_button:focus,
+.option_button:visited,
+.option_button:hover {
+  background-color: rgb(99, 52, 99);
+  color: white;
+}
+
 .select_options {
+  z-index: 1000;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
   max-width: 220px;
   padding: 0.5rem 1rem;
-  margin: 1rem auto;
+  /* margin: 1rem auto; */
   background-color: rgb(255, 180, 255);
+  transition: all 0.5s ease-in;
 }
 
 .input_group {
   padding: 0.2rem 0;
+  font-size: 1.2rem;
 }
 
 .input_group_label {
   margin-left: 1rem;
+}
+
+.close_btn {
+  display: block;
+  text-align: right;
+  cursor: pointer;
+}
+
+.animate-icon {
+  transition: 0.4s;
+}
+.rotate {
+  transform: rotate(90deg);
+}
+
+/*select difficulty*/
+
+.difficulty_button {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  border: none;
+  border-bottom: 1px solid white;
+  outline: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.difficulty_button:focus,
+.difficulty_button:hover,
+.option_button:visited {
+  border-bottom: 1px solid rgb(99, 52, 99);
 }

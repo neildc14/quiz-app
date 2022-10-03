@@ -1,11 +1,18 @@
-import React from "react";
-import Categories from "./Categories";
+import React, { Suspense, lazy } from "react";
+
+const Categories = lazy(() => import("./Categories"));
+const Difficulties = lazy(() => import("./Difficulties"));
+const Limit = lazy(() => import("./Limit"));
 
 function Options() {
   return (
-    <div className="options">
-      <Categories />
-    </div>
+    <Suspense>
+      <div className="options">
+        <Categories />
+        <Difficulties />
+        <Limit />
+      </div>
+    </Suspense>
   );
 }
 
