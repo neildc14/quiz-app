@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ReactDOM from "react-dom";
+import { DifficultiesContext } from "../layouts/QuizComponent";
 
 function SelectDifficulty(props) {
   const { setHidden } = props;
-  const [difficulty, setDifficulty] = useState("easy");
 
-  const setDifficultyHandler = (e) => {
-    setDifficulty(e.target.value);
-  };
+  const difficultyContext = useContext(DifficultiesContext);
+  const { setDifficultyHandler } = difficultyContext;
 
   let portal = document.getElementById("difficulty-modal");
 

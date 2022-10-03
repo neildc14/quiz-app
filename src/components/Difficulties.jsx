@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import SelectDifficulty from "./SelectDifficulty";
 
 function Difficulties(props) {

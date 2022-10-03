@@ -7,8 +7,9 @@ function Categories() {
   const [isHidden, setHidden] = useState(true);
 
   const categoriesContext = useContext(CategoriesContext);
+
   const { loading, categories, handleCheck, tags } = categoriesContext;
-  console.log(categoriesContext.loading);
+
   return (
     <div className="category">
       <button

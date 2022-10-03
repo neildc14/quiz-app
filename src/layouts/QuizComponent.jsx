@@ -1,7 +1,10 @@
 import React, { useReducer, useEffect, useState } from "react";
 import axios from "axios";
 import Options from "../components/Options";
-import owl from "../assets/images/owl.jpg";
+import Header from "./Header";
+
+export const CategoriesContext = React.createContext();
+export const DifficultiesContext = React.createContext();
 
 const initialState = {
   categories: [],
@@ -37,15 +40,13 @@ const reducer = (state, action) => {
   }
 };
 
-export const CategoriesContext = React.createContext();
-export const DifficultiesContext = React.crateContext() 
-
 function QuizComponent() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const [categories, setCategory] = useState({});
   const [loading, setLoading] = useState(true);
   const [tags, setTags] = useState([]);
+  const [difficulty, setDifficulty] = useState("easy");
 
   useEffect(() => {
     axios
@@ -69,19 +70,32 @@ function QuizComponent() {
     setTags([...tags.filter((tag) => tag !== e.target.dataset.tags)]);
   };
 
-  console.log(tags)
+  console.log(tags);
+
+  const setDifficultyHandler = (e) => {
+    setDifficulty(e.target.value);
+  };
+
+  console.log(difficulty);
+
   return (
     <div>
-      <header>
-        <div className="image_container">
-          <img className="image_logo" src={owl} alt="owl" />
-        </div>
-        <h1 className="logo">QUIZ APP</h1>
-      </header>
+      <Header />
       <CategoriesContext.Provider
-        value={{ loading, categories, tags, handleCheck }}
+        value={{
+          loading,
+          categories,
+          tags,
+          handleCheck,
+        }}
       >
-        <Options />
+        <DifficultiesContext.Provider
+          value={{
+            setDifficultyHandler,
+          }}
+        >
+          <Options />
+        </DifficultiesContext.Provider>
       </CategoriesContext.Provider>
     </div>
   );
