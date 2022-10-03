@@ -1,42 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import SelectCategory from "./SelectCategory";
-
-export const tagsFromCategories = [];
+import { CategoriesContext } from "../layouts/QuizComponent";
 
 function Categories() {
   const [isHidden, setHidden] = useState(true);
-  const [categories, setCategory] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [tags, setTags] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("https://the-trivia-api.com/api/categories")
-      .then((response) => {
-        setCategory(response.data);
-        setLoading(false);
-      })
-      .catch((error) => console.log(error));
-  }, []);
-
-  const handleCheck = (e) => {
-    if (e.target.checked === true) {
-      setTags([...tags, e.target.dataset.tags]);
-      tagsFromCategories.push(e.target.dataset.tags);
-    } else {
-      unCheck(e);
-    }
-  };
-
-  const unCheck = (e) => {
-    setTags([...tags.filter((tag) => tag !== e.target.dataset.tags)]);
-    console.log(
-      tagsFromCategories.filter((tag) => tag !== e.target.dataset.tags)
-    );
-  };
-
-  console.log(tagsFromCategories);
+  const categoriesContext = useContext(CategoriesContext);
+  const { loading, categories, handleCheck, tags } = categoriesContext;
+  console.log(categoriesContext.loading);
   return (
     <div className="category">
       <button
