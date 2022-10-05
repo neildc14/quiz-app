@@ -1,16 +1,9 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { LimitContext } from "../layouts/QuizComponent";
 
 function Limit() {
   const limitContext = useContext(LimitContext);
   const { limit, setLimit, changeLimit } = limitContext;
-
-  useEffect(() => {
-    if (limit < 5) {
-      setLimit(5);
-    }
-    console.log(limit);
-  }, [limit]);
 
   return (
     <div className="limit">
@@ -21,7 +14,7 @@ function Limit() {
         value={limit}
         onChange={changeLimit}
         max="20"
-        mix="5"
+        min="5"
         className="limit_input"
       />
       <label htmlFor="" className="limit_label">

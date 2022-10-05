@@ -7,22 +7,19 @@ function SelectDifficulty(props) {
 
   const difficultyContext = useContext(DifficultiesContext);
   const { difficulty, setDifficultyHandler } = difficultyContext;
+  const values = ["easy", "medium", "hard"];
 
   useEffect(() => {
     let difficultySelect = document.querySelectorAll(".difficulty_button");
-    console.log("diff");
-    difficultySelect.forEach((difficultyMode) => {
-      if (difficultyMode.value.includes(difficulty)) {
-        console.log(difficulty, difficultyMode.value);
-        difficultyMode.classList.add("selected_difficulty");
-      } else {
-        difficultyMode.classList.remove("selected_difficulty");
-      }
-    });
+
+    for (let difficultyMode of difficultySelect) {
+      difficultyMode.value.includes(difficulty)
+        ? difficultyMode.classList.add("selected_difficulty")
+        : difficultyMode.classList.remove("selected_difficulty");
+    }
   }, [difficulty]);
 
   let portal = document.getElementById("difficulty-modal");
-
   return ReactDOM.createPortal(
     <>
       <div className="select_options">
@@ -32,30 +29,18 @@ function SelectDifficulty(props) {
         >
           close
         </span>
-        <div className="input_group">
-          <input
-            type="button"
-            value="easy"
-            className="difficulty_button"
-            onClick={setDifficultyHandler}
-          />
-        </div>
-        <div className="input_group">
-          <input
-            type="button"
-            value="medium"
-            className="difficulty_button"
-            onClick={setDifficultyHandler}
-          />
-        </div>
-        <div className="input_group">
-          <input
-            type="button"
-            value="hard"
-            className="difficulty_button"
-            onClick={setDifficultyHandler}
-          />
-        </div>
+        {values.map((value) => {
+          return (
+            <div className="input_group" key={value}>
+              <input
+                type="button"
+                value={value}
+                className="difficulty_button select_button"
+                onClick={setDifficultyHandler}
+              />
+            </div>
+          );
+        })}
       </div>
     </>,
     portal

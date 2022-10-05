@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
+import React, { useState, useContext, useEffect } from "react";
 import SelectCategory from "./SelectCategory";
 import { CategoriesContext } from "../layouts/QuizComponent";
 
 function Categories() {
   const [isHidden, setHidden] = useState(true);
-
   const categoriesContext = useContext(CategoriesContext);
+  const { loading, categories, handleCheck, tagsOfCategory } =
+    categoriesContext;
 
-  const { loading, categories, handleCheck, tags } = categoriesContext;
+  const closeButton = () => {
+    setHidden(true);
+  };
 
   return (
     <div className="category">
@@ -17,7 +19,7 @@ function Categories() {
         onClick={() => setHidden(!isHidden)}
       >
         Select Categories
-        <span className="material-symbols-outlined category_button_arrow">
+        <span className="material-symbols-outlined button_arrow">
           chevron_right
         </span>
       </button>
@@ -28,8 +30,8 @@ function Categories() {
           loading={loading}
           categories={categories}
           handleCheck={handleCheck}
-          tags={tags}
-          setHidden={() => setHidden(true)}
+          tagsOfCategory={tagsOfCategory}
+          setHidden={closeButton}
         />
       )}
     </div>

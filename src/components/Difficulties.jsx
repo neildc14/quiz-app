@@ -4,6 +4,10 @@ import SelectDifficulty from "./SelectDifficulty";
 function Difficulties(props) {
   const [isHidden, setHidden] = useState(true);
 
+  const closeButton = () =>{
+    setHidden(true)
+  }
+
   return (
     <div className="difficulties">
       <button
@@ -11,11 +15,11 @@ function Difficulties(props) {
         onClick={() => setHidden(!isHidden)}
       >
         Select Difficulties
-        <span className="material-symbols-outlined category_button_arrow">
+        <span className="material-symbols-outlined button_arrow">
           chevron_right
         </span>
       </button>
-      {isHidden ? "" : <SelectDifficulty setHidden={() => setHidden(true)} />}
+      {isHidden ? "" : <SelectDifficulty setHidden={closeButton} />}
     </div>
   );
 }

@@ -7,7 +7,7 @@ function Header() {
       <div className="image_container">
         <img className="image_logo" src={owl} alt="owl" />
       </div>
-      <h1 className="logo">QUIZ APP</h1>
+      <h1 className="logo">isQUIZzy</h1>
     </header>
   );
 }
