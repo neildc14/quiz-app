@@ -5,7 +5,7 @@ import { CategoriesContext } from "../layouts/QuizComponent";
 function Categories() {
   const [isHidden, setHidden] = useState(true);
   const categoriesContext = useContext(CategoriesContext);
-  const { loading, categories, handleCheck, tagsOfCategory } =
+  const { loading, categories, handleCheck, selectedCategory } =
     categoriesContext;
 
   const closeButton = () => {
@@ -30,7 +30,7 @@ function Categories() {
           loading={loading}
           categories={categories}
           handleCheck={handleCheck}
-          tagsOfCategory={tagsOfCategory}
+          selectedCategory={selectedCategory}
           setHidden={closeButton}
         />
       )}

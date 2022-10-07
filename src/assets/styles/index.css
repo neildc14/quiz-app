@@ -59,7 +59,7 @@ header {
 }
 .logo {
   text-align: center;
-  font-family: "Bungee Spice", cursive;
+  font-family: cursive;
   font-size: 3rem;
   font-weight: 800;
   color: rgb(139, 35, 139) !important;
@@ -70,7 +70,9 @@ header {
   text-align: center;
 }
 
-.options {
+.options,
+.quiz,
+.questionnaire {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -215,7 +217,8 @@ input[type="range"]::-webkit-slider-runnable-track {
   color: hwb(300 14% 45%);
 }
 
-.start_button {
+.start_button,
+.back_button {
   width: 100%;
   margin-top: 1rem;
   outline: none;
@@ -231,12 +234,22 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 .start_button:hover,
 .start_button:focus,
-.start_button:visited {
+.start_button:visited,
+.back_button:hover,
+.back_button:focus,
+.back_button:visited {
   background-color: hwb(300 11% 59%);
 }
-
+@media screen and (max-width: 442px) {
+  .start_button,
+  .back_button {
+    position: absolute;
+    bottom: 0;
+  }
+}
 @media screen and (min-width: 442px) {
-  .start_button {
+  .start_button,
+  .back_button {
     width: 250px;
     border-radius: 4.5rem;
   }
@@ -246,4 +259,61 @@ input[type="range"]::-webkit-slider-runnable-track {
   margin-top: 2rem;
   height: 70vh;
   overflow-y: scroll;
+}
+
+.quiz {
+  margin-top: 10vh;
+}
+
+.questionnaire_question {
+  padding: 1rem;
+  text-align: center;
+}
+
+.answer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+.answer_choice {
+  width: 250px;
+  padding: 0.6rem 0;
+  border: 1px solid rgb(196, 68, 196);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.answer_choice:hover,
+.answer_choice:focus,
+.answer_choice:visited,
+.selected_answer {
+  background-color: rgb(204, 44, 204);
+  color: white;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  margin: 1.7rem auto;
+}
+
+.pagination_button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 6rem;
+  padding: 0.3rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.pagination_button_icon {
+  font-size: 14px;
+}
+
+.hide_button {
+  opacity: 0;
 }

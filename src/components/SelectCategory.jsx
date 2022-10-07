@@ -2,16 +2,17 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 
 function SelectCategory(props) {
-  const { tagsOfCategory, categories, handleCheck, loading, setHidden } = props;
+  const { selectedCategory, categories, handleCheck, loading, setHidden } =
+    props;
 
   useEffect(() => {
     const checkboxes = document.querySelectorAll(".checkbox");
     checkboxes.forEach((checkbox) => {
-      if (tagsOfCategory.includes(checkbox.dataset.tags)) {
+      if (selectedCategory.includes(checkbox.dataset.category)) {
         checkbox.checked = true;
       }
     });
-  }, [tagsOfCategory]);
+  }, [selectedCategory]);
 
   let categoryList = [];
   for (const [key, topics] of Object.entries(categories)) {
@@ -23,7 +24,8 @@ function SelectCategory(props) {
           name={key}
           id=""
           value={key}
-          data-tags={topics}
+          data-category={topics.at(-1)}
+          data-key={key}
           onClick={handleCheck}
           className="checkbox"
         />

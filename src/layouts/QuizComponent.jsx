@@ -1,12 +1,12 @@
-import React, { useReducer, useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import axios from "axios";
 import Header from "./Header";
-import Questions from "../components/Questions";
 
 const Categories = lazy(() => import("../components/Categories"));
 const Difficulties = lazy(() => import("../components/Difficulties"));
 const Limit = lazy(() => import("../components/Limit"));
 const Tags = lazy(() => import("../components/Tags"));
+const Quiz = lazy(() => import("../components/Quiz"));
 
 export const CategoriesContext = React.createContext();
 export const DifficultiesContext = React.createContext();
@@ -14,9 +14,11 @@ export const LimitContext = React.createContext();
 export const TagsContext = React.createContext();
 
 function QuizComponent() {
-  const [categories, setCategory] = useState({});
   const [loading, setLoading] = useState(true);
-  const [tagsOfCategory, setTagsOfCategory] = useState([]);
+  const [categories, setCategory] = useState({});
+  const [selectedCategory, setSelectedCategory] = useState([
+    "arts_and_literature",
+  ]);
   const [difficulty, setDifficulty] = useState("easy");
   const [limit, setLimit] = useState(5);
   const [tagsFromAPI, setTagsFromAPI] = useState([]);
@@ -43,19 +45,23 @@ function QuizComponent() {
 
   const handleCheck = (e) => {
     if (e.target.checked === true) {
-      setTagsOfCategory([...tagsOfCategory, e.target.dataset.tags]);
+      setSelectedCategory([...selectedCategory, e.target.dataset.category]);
     } else {
       unCheck(e);
     }
   };
 
+  console.log(selectedCategory);
+
   const unCheck = (e) => {
-    setTagsOfCategory([
-      ...tagsOfCategory.filter((tag) => {
-        return tag !== e.target.dataset.tags;
+    setSelectedCategory([
+      ...selectedCategory.filter((category) => {
+        return category !== e.target.dataset.category;
       }),
     ]);
   };
+
+  console.log(selectedCategory);
 
   const setDifficultyHandler = (e) => {
     setDifficulty(e.target.value);
@@ -94,52 +100,73 @@ function QuizComponent() {
       }),
     ]);
   };
+
   console.log(selectedTags);
 
   const startQuiz = () => {
     setStart(true);
   };
+
+  const backToMenu = () => {
+    setStart(false);
+  };
+
   return (
     <div>
-      <Header />
       {!start ? (
-        <Suspense>
-          <div className="options">
-            <CategoriesContext.Provider
-              value={{
-                loading,
-                categories,
-                tagsOfCategory,
-                handleCheck,
-              }}
-            >
-              <Categories />
-            </CategoriesContext.Provider>
+        <div>
+          <Header />
+          <Suspense>
+            <div className="options">
+              <CategoriesContext.Provider
+                value={{
+                  loading,
+                  categories,
+                  selectedCategory,
+                  handleCheck,
+                }}
+              >
+                <Categories />
+              </CategoriesContext.Provider>
 
-            <DifficultiesContext.Provider
-              value={{ difficulty, setDifficultyHandler }}
-            >
-              <Difficulties />
-            </DifficultiesContext.Provider>
+              <DifficultiesContext.Provider
+                value={{ difficulty, setDifficultyHandler }}
+              >
+                <Difficulties />
+              </DifficultiesContext.Provider>
 
-            <LimitContext.Provider value={{ limit, setLimit, changeLimit }}>
-              <Limit />
-            </LimitContext.Provider>
+              <LimitContext.Provider value={{ limit, setLimit, changeLimit }}>
+                <Limit />
+              </LimitContext.Provider>
 
-            <TagsContext.Provider
-              value={{ loading, tagsFromAPI, selectTagsHandler, selectedTags }}
-            >
-              <Tags />
-            </TagsContext.Provider>
+              <TagsContext.Provider
+                value={{
+                  loading,
+                  tagsFromAPI,
+                  selectTagsHandler,
+                  selectedTags,
+                }}
+              >
+                <Tags />
+              </TagsContext.Provider>
 
-            {error !== "" ? <p className="error_message">{error}</p> : null}
-            <button className=" start_button" onClick={startQuiz}>
-              Start
-            </button>
-          </div>
-        </Suspense>
+              {error !== "" ? <p className="error_message">{error}</p> : null}
+              <button className=" start_button" onClick={startQuiz}>
+                Start
+              </button>
+            </div>
+          </Suspense>
+        </div>
       ) : (
-        <Questions />
+        <Suspense>
+          <Quiz
+            selectedCategory={selectedCategory}
+            difficulty={difficulty}
+            limit={limit}
+            selectedTags={selectedTags}
+            backToMenu={backToMenu}
+          />
+        </Suspense>
       )}
     </div>
   );
