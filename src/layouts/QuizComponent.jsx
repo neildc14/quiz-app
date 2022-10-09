@@ -51,8 +51,6 @@ function QuizComponent() {
     }
   };
 
-  console.log(selectedCategory);
-
   const unCheck = (e) => {
     setSelectedCategory([
       ...selectedCategory.filter((category) => {
@@ -60,8 +58,6 @@ function QuizComponent() {
       }),
     ]);
   };
-
-  console.log(selectedCategory);
 
   const setDifficultyHandler = (e) => {
     setDifficulty(e.target.value);
@@ -101,8 +97,6 @@ function QuizComponent() {
     ]);
   };
 
-  console.log(selectedTags);
-
   const startQuiz = () => {
     setStart(true);
   };
@@ -112,7 +106,7 @@ function QuizComponent() {
   };
 
   return (
-    <div>
+    <>
       {!start ? (
         <div>
           <Header />
@@ -168,7 +162,7 @@ function QuizComponent() {
           />
         </Suspense>
       )}
-    </div>
+    </>
   );
 }
 

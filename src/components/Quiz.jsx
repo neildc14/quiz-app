@@ -55,6 +55,8 @@ function Quiz(props) {
     setLastQuestion(true);
   };
 
+  console.log("aaa", answer);
+
   return (
     <div className="quiz">
       {!loading && (
@@ -65,6 +67,7 @@ function Quiz(props) {
             <div>
               <Question
                 question={question}
+                questionNumber={questionNumber}
                 correctAnswer={correctAnswer}
                 setCorrectAnswer={setCorrectAnswer}
                 answer={answer}

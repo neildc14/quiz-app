@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 function Question(props) {
   const { question, correctAnswer, setCorrectAnswer, answer, setAnswer } =
     props;
+  const [answerPerQuestion, setAnswerPerQuestion] = useState("");
 
   useEffect(() => {
     if (question !== undefined) {
@@ -14,16 +15,15 @@ function Question(props) {
 
   useEffect(() => {
     shuffleChoices(multipleChoice);
-  }, []);
+  }, [correctAnswer]);
 
   useEffect(() => {
-    let answerChoice = document.querySelectorAll(".answer_choice");
-    answerChoice.forEach((choice) => {
-      answer.includes(choice.value)
-        ? choice.classList.add("selected_answer")
-        : choice.classList.remove("selected_answer");
-    });
-  }, [answer]);
+    if (answerPerQuestion !== "") {
+      setAnswer({ ...answer, ...answerPerQuestion });
+    }
+  }, [answerPerQuestion]);
+
+  console.log(answer, answerPerQuestion);
 
   if (question === undefined) {
     return;
@@ -40,23 +40,29 @@ function Question(props) {
         multipleChoice[j],
         multipleChoice[i],
       ];
-      console.log("shuffled");
     }
+  };
+
+  const settingAnswerPerQuestion = (id, value) => {
+    setAnswerPerQuestion({ [id]: value });
   };
 
   const clickAnswerHandler = (e) => {
-    if (!answer.includes(e.target.value)) {
-      setAnswer([...answer, e.target.value]);
-    } else {
-      unclickAnswerHandler(e);
-    }
+    settingAnswerPerQuestion(question.id, e.target.value);
+    unclickAnswerHandler(e);
   };
 
   const unclickAnswerHandler = (e) => {
-    setAnswer([...answer.filter((answer) => answer.value === e.target.value)]);
+    if (answerPerQuestion === e.target.value) {
+      e.target.classList.add("selected_answer");
+    } else {
+      e.target.classList.remove("selected_answer");
+    }
   };
 
-  console.log(answer);
+  for (let [key, value] of Object.entries(answerPerQuestion)) {
+    console.log(key, value);
+  }
   return (
     <div className="questionnaire">
       <h4 className="questionnaire_question">{question.question}</h4>
