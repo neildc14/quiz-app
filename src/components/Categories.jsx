@@ -5,8 +5,13 @@ import { CategoriesContext } from "../layouts/QuizComponent";
 function Categories() {
   const [isHidden, setHidden] = useState(true);
   const categoriesContext = useContext(CategoriesContext);
-  const { loading, categories, handleCheck, selectedCategory } =
-    categoriesContext;
+  const {
+    loading,
+    categories,
+    handleCheck,
+    selectedCategory,
+    setSelectedCategory,
+  } = categoriesContext;
 
   const closeButton = () => {
     setHidden(true);
@@ -31,6 +36,7 @@ function Categories() {
           categories={categories}
           handleCheck={handleCheck}
           selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
           setHidden={closeButton}
         />
       )}

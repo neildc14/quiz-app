@@ -6,7 +6,7 @@ function SelectDifficulty(props) {
   const { setHidden } = props;
 
   const difficultyContext = useContext(DifficultiesContext);
-  const { difficulty, setDifficultyHandler } = difficultyContext;
+  const { difficulty, setDifficulty } = difficultyContext;
   const values = ["easy", "medium", "hard"];
 
   useEffect(() => {
@@ -18,6 +18,10 @@ function SelectDifficulty(props) {
         : difficultyMode.classList.remove("selected_difficulty");
     }
   }, [difficulty]);
+
+  const setDifficultyHandler = (e) => {
+    setDifficulty(e.target.value);
+  };
 
   let portal = document.getElementById("difficulty-modal");
   return ReactDOM.createPortal(

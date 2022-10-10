@@ -43,30 +43,6 @@ function QuizComponent() {
       });
   }, [CATEGORIES_URL]);
 
-  const handleCheck = (e) => {
-    if (e.target.checked === true) {
-      setSelectedCategory([...selectedCategory, e.target.dataset.category]);
-    } else {
-      unCheck(e);
-    }
-  };
-
-  const unCheck = (e) => {
-    setSelectedCategory([
-      ...selectedCategory.filter((category) => {
-        return category !== e.target.dataset.category;
-      }),
-    ]);
-  };
-
-  const setDifficultyHandler = (e) => {
-    setDifficulty(e.target.value);
-  };
-
-  const changeLimit = (e) => {
-    setLimit(e.target.value);
-  };
-
   const TAGS_URL =
     process.env.REACT_APP_TAGS_URL ?? "https://the-trivia-api.com/api/tags";
 
@@ -97,19 +73,19 @@ function QuizComponent() {
                   loading,
                   categories,
                   selectedCategory,
-                  handleCheck,
+                  setSelectedCategory,
                 }}
               >
                 <Categories />
               </CategoriesContext.Provider>
 
               <DifficultiesContext.Provider
-                value={{ difficulty, setDifficultyHandler }}
+                value={{ difficulty, setDifficulty }}
               >
                 <Difficulties />
               </DifficultiesContext.Provider>
 
-              <LimitContext.Provider value={{ limit, setLimit, changeLimit }}>
+              <LimitContext.Provider value={{ limit, setLimit }}>
                 <Limit />
               </LimitContext.Provider>
 

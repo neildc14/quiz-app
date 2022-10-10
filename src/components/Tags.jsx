@@ -5,7 +5,13 @@ import { TagsContext } from "../layouts/QuizComponent";
 function Tags() {
   const [isHidden, setHidden] = useState(true);
   const tagsContext = useContext(TagsContext);
-  const { loading, tagsFromAPI, selectTagsHandler, selectedTags } = tagsContext;
+  const {
+    loading,
+    tagsFromAPI,
+    selectTagsHandler,
+    selectedTags,
+    setSelectedTags,
+  } = tagsContext;
 
   const closeButton = () => {
     setHidden(true);
@@ -31,6 +37,7 @@ function Tags() {
           setHidden={closeButton}
           selectTagsHandler={selectTagsHandler}
           selectedTags={selectedTags}
+          setSelectedTags={setSelectedTags}
         />
       )}
     </div>

@@ -3,7 +3,11 @@ import { LimitContext } from "../layouts/QuizComponent";
 
 function Limit() {
   const limitContext = useContext(LimitContext);
-  const { limit, setLimit, changeLimit } = limitContext;
+  const { limit, setLimit } = limitContext;
+
+  const changeLimit = (e) => {
+    setLimit(e.target.value);
+  };
 
   return (
     <div className="limit">
