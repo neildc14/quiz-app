@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ReactDOM from "react-dom";
 
 function SelectTags(props) {
-  const { loading, setHidden, tags, selectedTags, selectTagsHandler } = props;
+  const { loading, setHidden, tags, selectedTags, setSelectedTags } = props;
 
   useEffect(() => {
     let tagsSelect = document.querySelectorAll(".tag_button");
@@ -12,6 +12,22 @@ function SelectTags(props) {
         : tag.classList.remove("selected_tag");
     });
   }, [selectedTags]);
+
+  const selectTagsHandler = (e) => {
+    if (selectedTags.includes(e.target.value)) {
+      unselectTagsHandler(e);
+    } else {
+      setSelectedTags([...selectedTags, e.target.value]);
+    }
+  };
+
+  const unselectTagsHandler = (e) => {
+    setSelectedTags([
+      ...selectedTags.filter((tag) => {
+        return tag !== e.target.value;
+      }),
+    ]);
+  };
 
   let portal = document.getElementById("portal");
   return ReactDOM.createPortal(

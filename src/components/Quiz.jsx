@@ -4,14 +4,12 @@ import Question from "./Question";
 import Pagination from "./Pagination";
 
 function Quiz(props) {
-  const { selectedCategory, difficulty, limit, selectedTags, backToMenu } =
-    props;
+  const { selectedCategory, difficulty, limit, selectedTags, setStart } = props;
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isFirstQuestion, setFirstQuestion] = useState(true);
   const [isLastQuestion, setLastQuestion] = useState(false);
   const [questionNumber, setQuestionNumber] = useState(1);
-  const [correctAnswer, setCorrectAnswer] = useState([]);
   const [answer, setAnswer] = useState([]);
 
   let category;
@@ -47,15 +45,13 @@ function Quiz(props) {
   };
   displayQuestion(questionNumber);
 
-  const displayPreviousButton = () => {
-    setFirstQuestion(false);
-  };
+  console.log(questionNumber);
 
-  const displayNextButton = () => {
-    setLastQuestion(true);
-  };
+  console.log("accumulated answers", answer);
 
-  console.log("aaa", answer);
+  const backToMenu = () => {
+    setStart(false);
+  };
 
   return (
     <div className="quiz">
@@ -67,17 +63,17 @@ function Quiz(props) {
             <div>
               <Question
                 question={question}
-                questionNumber={questionNumber}
-                correctAnswer={correctAnswer}
-                setCorrectAnswer={setCorrectAnswer}
                 answer={answer}
                 setAnswer={setAnswer}
               />
               <Pagination
+                questions={questions}
                 isFirstQuestion={isFirstQuestion}
                 isLastQuestion={isLastQuestion}
-                displayPreviousButton={displayPreviousButton}
-                displayNextButton={displayNextButton}
+                setFirstQuestion={setFirstQuestion}
+                setLastQuestion={setLastQuestion}
+                questionNumber={questionNumber}
+                setQuestionNumber={setQuestionNumber}
               />
             </div>
           )}

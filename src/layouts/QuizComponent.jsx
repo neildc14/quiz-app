@@ -81,28 +81,8 @@ function QuizComponent() {
       });
   }, [TAGS_URL]);
 
-  const selectTagsHandler = (e) => {
-    if (selectedTags.includes(e.target.value)) {
-      unselectTagsHandler(e);
-    } else {
-      setSelectedTags([...selectedTags, e.target.value]);
-    }
-  };
-
-  const unselectTagsHandler = (e) => {
-    setSelectedTags([
-      ...selectedTags.filter((tag) => {
-        return tag !== e.target.value;
-      }),
-    ]);
-  };
-
   const startQuiz = () => {
     setStart(true);
-  };
-
-  const backToMenu = () => {
-    setStart(false);
   };
 
   return (
@@ -137,8 +117,8 @@ function QuizComponent() {
                 value={{
                   loading,
                   tagsFromAPI,
-                  selectTagsHandler,
                   selectedTags,
+                  setSelectedTags,
                 }}
               >
                 <Tags />
@@ -158,7 +138,7 @@ function QuizComponent() {
             difficulty={difficulty}
             limit={limit}
             selectedTags={selectedTags}
-            backToMenu={backToMenu}
+            setStart={setStart}
           />
         </Suspense>
       )}

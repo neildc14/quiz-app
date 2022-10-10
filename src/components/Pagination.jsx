@@ -2,10 +2,13 @@ import React, { useEffect } from "react";
 
 function Pagination(props) {
   const {
+    questions,
     isFirstQuestion,
     isLastQuestion,
-    displayPreviousButton,
-    displayNextButton,
+    setFirstQuestion,
+    setLastQuestion,
+    questionNumber,
+    setQuestionNumber,
   } = props;
 
   useEffect(() => {
@@ -30,9 +33,30 @@ function Pagination(props) {
     }
   }, [isLastQuestion]);
 
+  const nextQuestion = () => {
+    if (questionNumber + 1 === questions.length) {
+      setLastQuestion(true);
+    } else {
+      setQuestionNumber(questionNumber + 1);
+      setFirstQuestion(false);
+    }
+  };
+
+  const previousQuestion = () => {
+    if (questionNumber === 1) {
+      setFirstQuestion(true);
+    } else {
+      setQuestionNumber(questionNumber - 1);
+      setLastQuestion(false);
+    }
+  };
+
   return (
     <div className="pagination">
-      <button className="pagination_button pagination_button-previous">
+      <button
+        className="pagination_button pagination_button-previous"
+        onClick={previousQuestion}
+      >
         <span className="material-symbols-outlined pagination_button_icon">
           arrow_back_ios
         </span>
@@ -40,7 +64,7 @@ function Pagination(props) {
 
       <button
         className="pagination_button pagination_button-next"
-        onClick={displayPreviousButton}
+        onClick={nextQuestion}
       >
         <span className="material-symbols-outlined pagination_button_icon">
           arrow_forward_ios
