@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Question from "./Question";
 import Pagination from "./Pagination";
+import Submit from "./Submit";
 
 function Quiz(props) {
   const { selectedCategory, difficulty, limit, selectedTags, setStart } = props;
@@ -9,8 +10,9 @@ function Quiz(props) {
   const [loading, setLoading] = useState(true);
   const [isFirstQuestion, setFirstQuestion] = useState(true);
   const [isLastQuestion, setLastQuestion] = useState(false);
-  const [questionNumber, setQuestionNumber] = useState(1);
+  const [questionNumber, setQuestionNumber] = useState(0);
   const [answer, setAnswer] = useState([]);
+  const [isSubmitted, setSubmit] = useState(false);
 
   let category;
   selectedCategory.forEach((selected_cat) => {
@@ -45,13 +47,14 @@ function Quiz(props) {
   };
   displayQuestion(questionNumber);
 
-  console.log(questionNumber);
+  console.log(questions, questionNumber);
 
   console.log("accumulated answers", answer);
 
   const backToMenu = () => {
     setStart(false);
   };
+  console.log(isSubmitted);
 
   return (
     <div className="quiz">
@@ -61,26 +64,32 @@ function Quiz(props) {
             <div>No quiz found. Try new category</div>
           ) : (
             <div>
-              <Question
-                question={question}
-                answer={answer}
-                setAnswer={setAnswer}
-              />
-              <Pagination
-                questions={questions}
-                isFirstQuestion={isFirstQuestion}
-                isLastQuestion={isLastQuestion}
-                setFirstQuestion={setFirstQuestion}
-                setLastQuestion={setLastQuestion}
-                questionNumber={questionNumber}
-                setQuestionNumber={setQuestionNumber}
-              />
+              {!isSubmitted && (
+                <div>
+                  <Question
+                    question={question}
+                    answer={answer}
+                    setAnswer={setAnswer}
+                    questionNumber={questionNumber}
+                  />
+                  <Pagination
+                    questions={questions}
+                    isFirstQuestion={isFirstQuestion}
+                    isLastQuestion={isLastQuestion}
+                    setFirstQuestion={setFirstQuestion}
+                    setLastQuestion={setLastQuestion}
+                    questionNumber={questionNumber}
+                    setQuestionNumber={setQuestionNumber}
+                  />
+                  <Submit isSubmitted={isSubmitted} setSubmit={setSubmit} />
+                </div>
+              )}
             </div>
           )}
         </div>
       )}
-      <button className=" start_button" onClick={backToMenu}>
-        Menu
+      <button className=" back_button" onClick={backToMenu}>
+        <span className="material-symbols-outlined">home</span>
       </button>
     </div>
   );

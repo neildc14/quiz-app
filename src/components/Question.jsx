@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 function Question(props) {
-  const { question, answer, setAnswer } = props;
+  const { questionNumber, question, answer, setAnswer } = props;
   const [answerPerQuestion, setAnswerPerQuestion] = useState("");
 
+  console.log(question);
   useEffect(() => {
     shuffleChoices(multipleChoice);
   }, [question]);
@@ -18,8 +19,8 @@ function Question(props) {
 
   useEffect(() => {
     let answerChoice = document.querySelectorAll(".answer_choice");
+    let id = question.id;
     answerChoice.forEach((choice) => {
-      let id = question.id;
       if (answer[id] === undefined) {
         return;
       }
@@ -30,6 +31,18 @@ function Question(props) {
       }
     });
   }, [question.id]);
+
+  useEffect(() => {
+    let answerChoice = document.querySelectorAll(".answer_choice");
+    answerChoice.forEach((choice) => {
+      let valueLength = choice.value.length;
+      if (valueLength >= 20) {
+        choice.classList.add("answer_choice-wrapped");
+      }
+
+      console.log(choice, questionNumber);
+    });
+  }, [questionNumber, question]);
 
   if (question === undefined) {
     return;

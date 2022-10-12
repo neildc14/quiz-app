@@ -43,7 +43,7 @@ function Pagination(props) {
   };
 
   const previousQuestion = () => {
-    if (questionNumber === 1) {
+    if (questionNumber === 0) {
       setFirstQuestion(true);
     } else {
       setQuestionNumber(questionNumber - 1);
