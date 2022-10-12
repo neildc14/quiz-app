@@ -3,10 +3,13 @@ import React, { useEffect, useState } from "react";
 function Question(props) {
   const { questionNumber, question, answer, setAnswer } = props;
   const [answerPerQuestion, setAnswerPerQuestion] = useState("");
+  const [isShuffled, setShuffle] = useState(false);
 
   console.log(question);
   useEffect(() => {
     shuffleChoices(multipleChoice);
+    setShuffle(true);
+    console.log(multipleChoice, "Effect");
   }, [question]);
 
   useEffect(() => {
@@ -39,8 +42,6 @@ function Question(props) {
       if (valueLength >= 20) {
         choice.classList.add("answer_choice-wrapped");
       }
-
-      console.log(choice, questionNumber);
     });
   }, [questionNumber, question]);
 
@@ -48,9 +49,10 @@ function Question(props) {
     return;
   }
 
-  const answers = question.incorrectAnswers;
-  answers.push(question.correctAnswer);
-  const multipleChoice = [...new Set(answers)];
+  const answers = [...question.incorrectAnswers, question.correctAnswer];
+  // answers.push(question.correctAnswer);
+  let multipleChoice = [...new Set(answers)];
+  console.log(multipleChoice, "raw");
 
   const shuffleChoices = (multipleChoice) => {
     for (let i = multipleChoice.length - 1; i > 0; i--) {
@@ -59,8 +61,11 @@ function Question(props) {
         multipleChoice[j],
         multipleChoice[i],
       ];
+      console.log(multipleChoice, "shuffle");
     }
   };
+
+  console.log(answers);
 
   const settingAnswerPerQuestion = (id, value, correctAnswer) => {
     setAnswerPerQuestion({
@@ -76,19 +81,24 @@ function Question(props) {
     );
   };
 
+  isShuffled &&
+    multipleChoice.map((choice) => {
+      console.log(choice, "map");
+    });
   return (
     <div className="questionnaire">
       <h4 className="questionnaire_question">{question.question}</h4>
       <section className="answer">
-        {multipleChoice.map((choice) => (
-          <input
-            key={choice}
-            type="button"
-            value={choice}
-            className="answer_choice"
-            onClick={clickAnswerHandler}
-          />
-        ))}
+        {isShuffled &&
+          multipleChoice.map((choice) => (
+            <input
+              key={choice}
+              type="button"
+              value={choice}
+              className="answer_choice"
+              onClick={clickAnswerHandler}
+            />
+          ))}
       </section>
     </div>
   );

@@ -347,3 +347,20 @@ input[type="range"]::-webkit-slider-runnable-track {
   margin: 0 auto;
   text-align: center;
 }
+
+.scores {
+  text-align: center;
+}
+
+.scores_description {
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+.scores_total {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.scores_comment {
+  font-size: 2.5rem;
+}

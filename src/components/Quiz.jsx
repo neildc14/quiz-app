@@ -3,6 +3,7 @@ import axios from "axios";
 import Question from "./Question";
 import Pagination from "./Pagination";
 import Submit from "./Submit";
+import Scores from "./Scores";
 
 function Quiz(props) {
   const { selectedCategory, difficulty, limit, selectedTags, setStart } = props;
@@ -14,6 +15,7 @@ function Quiz(props) {
   const [answer, setAnswer] = useState([]);
   const [isSubmitted, setSubmit] = useState(false);
 
+  console.log(limit);
   let category;
   selectedCategory.forEach((selected_cat) => {
     category = `categories=${selected_cat}`;
@@ -54,7 +56,6 @@ function Quiz(props) {
   const backToMenu = () => {
     setStart(false);
   };
-  console.log(isSubmitted);
 
   return (
     <div className="quiz">
@@ -84,6 +85,7 @@ function Quiz(props) {
                   <Submit isSubmitted={isSubmitted} setSubmit={setSubmit} />
                 </div>
               )}
+              {isSubmitted && <Scores answer={answer} limit={limit} />}
             </div>
           )}
         </div>
