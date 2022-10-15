@@ -89,7 +89,7 @@ function Quiz(props) {
                   />
                 </div>
               )}
-              {isSubmitted && <Scores answer={answer} limit={limit} />}
+              {isSubmitted && <Scores answer={answer} limitation={limit} />}
             </div>
           )}
           <div className="button_container">
