@@ -14,8 +14,8 @@ function Quiz(props) {
   const [questionNumber, setQuestionNumber] = useState(0);
   const [answer, setAnswer] = useState([]);
   const [isSubmitted, setSubmit] = useState(false);
+  const [preventShuffle, setPreventShuffle] = useState(false);
 
-  console.log(limit);
   let category;
   selectedCategory.forEach((selected_cat) => {
     category = `categories=${selected_cat}`;
@@ -38,7 +38,6 @@ function Quiz(props) {
       )
       .then((response) => {
         setQuestions(response.data);
-        setLoading(false);
       })
       .catch((error) => console.log(error));
   }, [category, tags, difficulty, limit, selectedCategory, selectedTags]);
@@ -49,9 +48,11 @@ function Quiz(props) {
   };
   displayQuestion(questionNumber);
 
-  console.log(questions, questionNumber);
-
-  console.log("accumulated answers", answer);
+  useEffect(() => {
+    setInterval(() => {
+      setLoading(false);
+    }, 1000);
+  });
 
   const backToMenu = () => {
     setStart(false);
@@ -72,27 +73,32 @@ function Quiz(props) {
                     answer={answer}
                     setAnswer={setAnswer}
                     questionNumber={questionNumber}
+                    preventShuffle={preventShuffle}
+                    setPreventShuffle={setPreventShuffle}
                   />
                   <Pagination
                     questions={questions}
-                    isFirstQuestion={isFirstQuestion}
                     isLastQuestion={isLastQuestion}
                     setFirstQuestion={setFirstQuestion}
                     setLastQuestion={setLastQuestion}
                     questionNumber={questionNumber}
                     setQuestionNumber={setQuestionNumber}
+                    preventShuffle={preventShuffle}
+                    setPreventShuffle={setPreventShuffle}
+                    setSubmit={setSubmit}
                   />
-                  <Submit isSubmitted={isSubmitted} setSubmit={setSubmit} />
                 </div>
               )}
               {isSubmitted && <Scores answer={answer} limit={limit} />}
             </div>
           )}
+          <div className="button_container">
+            <button className=" back_button" onClick={backToMenu}>
+              <span className="material-symbols-outlined">home</span>
+            </button>
+          </div>
         </div>
       )}
-      <button className=" back_button" onClick={backToMenu}>
-        <span className="material-symbols-outlined">home</span>
-      </button>
     </div>
   );
 }

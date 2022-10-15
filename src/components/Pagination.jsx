@@ -1,74 +1,37 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 function Pagination(props) {
+  const [buttonLabel, setButtonLabel] = useState("NEXT");
   const {
     questions,
-    isFirstQuestion,
-    isLastQuestion,
-    setFirstQuestion,
     setLastQuestion,
     questionNumber,
     setQuestionNumber,
+    setSubmit,
   } = props;
 
   useEffect(() => {
-    let previousButton = document.querySelector(".pagination_button-previous");
-    if (isFirstQuestion) {
-      previousButton.classList.add("hide_button");
-      previousButton.disabled = true;
-    } else {
-      previousButton.classList.remove("hide_button");
-      previousButton.disabled = false;
+    if (questionNumber + 1 === questions.length) {
+      setButtonLabel("SUBMIT");
     }
-  }, [isFirstQuestion]);
-
-  useEffect(() => {
-    let nextButton = document.querySelector(".pagination_button-next");
-    if (isLastQuestion) {
-      nextButton.classList.add("hide_button");
-      nextButton.disabled = true;
-    } else {
-      nextButton.classList.remove("hide_button");
-      nextButton.disabled = false;
-    }
-  }, [isLastQuestion]);
-
+    console.log(buttonLabel);
+  }, [questionNumber]);
   const nextQuestion = () => {
     if (questionNumber + 1 === questions.length) {
       setLastQuestion(true);
+      setSubmit(true);
     } else {
       setQuestionNumber(questionNumber + 1);
-      setFirstQuestion(false);
-    }
-  };
-
-  const previousQuestion = () => {
-    if (questionNumber === 0) {
-      setFirstQuestion(true);
-    } else {
-      setQuestionNumber(questionNumber - 1);
-      setLastQuestion(false);
     }
   };
 
   return (
     <div className="pagination">
       <button
-        className="pagination_button pagination_button-previous"
-        onClick={previousQuestion}
-      >
-        <span className="material-symbols-outlined pagination_button_icon">
-          arrow_back_ios
-        </span>
-      </button>
-
-      <button
-        className="pagination_button pagination_button-next"
+        className="pagination_button-next submit_button"
         onClick={nextQuestion}
       >
-        <span className="material-symbols-outlined pagination_button_icon">
-          arrow_forward_ios
-        </span>
+        <span> {buttonLabel}</span>
       </button>
     </div>
   );

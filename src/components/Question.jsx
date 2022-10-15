@@ -4,12 +4,11 @@ function Question(props) {
   const { questionNumber, question, answer, setAnswer } = props;
   const [answerPerQuestion, setAnswerPerQuestion] = useState("");
   const [isShuffled, setShuffle] = useState(false);
+  const [multipleChoices, setMultipleChoice] = useState([]);
 
-  console.log(question);
   useEffect(() => {
-    shuffleChoices(multipleChoice);
+    shuffleChoices([...new Set(answers)]);
     setShuffle(true);
-    console.log(multipleChoice, "Effect");
   }, [question]);
 
   useEffect(() => {
@@ -18,42 +17,26 @@ function Question(props) {
     }
   }, [answerPerQuestion]);
 
-  console.log(answer, answerPerQuestion);
-
-  useEffect(() => {
-    let answerChoice = document.querySelectorAll(".answer_choice");
-    let id = question.id;
-    answerChoice.forEach((choice) => {
-      if (answer[id] === undefined) {
-        return;
-      }
-      if (answer[id]["chosenAnswer"] === choice.value) {
-        choice.classList.add("selected_answer");
-      } else {
-        choice.classList.remove("selected_answer");
-      }
-    });
-  }, [question.id]);
-
   useEffect(() => {
     let answerChoice = document.querySelectorAll(".answer_choice");
     answerChoice.forEach((choice) => {
+      console.log(choice);
+      console.log(questionNumber);
       let valueLength = choice.value.length;
       if (valueLength >= 20) {
         choice.classList.add("answer_choice-wrapped");
+        console.log(valueLength);
+      } else if (valueLength >= 30) {
+        choice.scroll.cssText = "font-size: .5rem";
       }
     });
-  }, [questionNumber, question]);
+  }, [multipleChoices]);
 
   if (question === undefined) {
     return;
   }
 
   const answers = [...question.incorrectAnswers, question.correctAnswer];
-  // answers.push(question.correctAnswer);
-  let multipleChoice = [...new Set(answers)];
-  console.log(multipleChoice, "raw");
-
   const shuffleChoices = (multipleChoice) => {
     for (let i = multipleChoice.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -61,11 +44,9 @@ function Question(props) {
         multipleChoice[j],
         multipleChoice[i],
       ];
-      console.log(multipleChoice, "shuffle");
     }
+    setMultipleChoice(multipleChoice);
   };
-
-  console.log(answers);
 
   const settingAnswerPerQuestion = (id, value, correctAnswer) => {
     setAnswerPerQuestion({
@@ -81,16 +62,17 @@ function Question(props) {
     );
   };
 
-  isShuffled &&
-    multipleChoice.map((choice) => {
-      console.log(choice, "map");
-    });
   return (
     <div className="questionnaire">
-      <h4 className="questionnaire_question">{question.question}</h4>
+      <div className="questionnaire_container">
+        <h4 className="questionnaire_number">
+          Question No: {questionNumber + 1}
+        </h4>
+        <h4 className="questionnaire_question">{question.question}</h4>
+      </div>
       <section className="answer">
         {isShuffled &&
-          multipleChoice.map((choice) => (
+          multipleChoices.map((choice) => (
             <input
               key={choice}
               type="button"
