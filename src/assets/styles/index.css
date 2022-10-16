@@ -239,7 +239,11 @@ input[type="range"]::-webkit-slider-runnable-track {
 .submit_button:visited,
 .submit_button:hover,
 .submit_button:focus,
-.submit_button:visited {
+.submit_button:visited,
+.scores_button:visited,
+.scores_button:hover,
+.scores_button:focus,
+.scores_button:visited {
   color: white;
   background-color: hwb(300 11% 59%);
 }
@@ -249,7 +253,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 .back_button,
-.submit_button {
+.submit_button,
+.scores_button {
   width: 250px;
   height: 2rem;
   border-radius: 4.5rem;
@@ -257,6 +262,11 @@ input[type="range"]::-webkit-slider-runnable-track {
   outline: none;
   border: none;
   cursor: pointer;
+}
+
+.back_button {
+  padding-top: 2px;
+  border: 1px solid hwb(300 84% 15%);
 }
 
 .back_button-show {
@@ -288,7 +298,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   overflow-y: scroll;
 }
 
-.quiz {
+.questionnaire {
   margin-top: 5vh;
 }
 
@@ -363,21 +373,96 @@ input[type="range"]::-webkit-slider-runnable-track {
   text-align: center;
 }
 
+.scores_container {
+  padding: 3rem;
+  z-index: 100;
+  border-radius: 0 0 30px 30px;
+  background: rgb(133, 18, 133);
+  color: white;
+}
 .scores {
-  height: 80vh;
   width: 250px;
+  z-index: 10 !important;
   text-align: center;
 }
 
+.scores hr {
+  margin: 0;
+}
+
 .scores_description {
-  font-weight: 800;
+  letter-spacing: 3px;
+  font-weight: 400;
   font-size: 1.2rem;
 }
+
 .scores_total {
   margin: 0;
+
   font-size: 2.5rem;
+}
+.score_image {
+  margin-top: 1rem;
+}
+.score_owl {
+  height: 10rem;
+  width: 10rem;
+  animation: bounce 5s infinite;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1, 1) translateY(0);
+  }
+  10% {
+    transform: scale(1.1, 0.9) translateY(0);
+  }
+  30% {
+    transform: scale(0.9, 1.1) translateY(-70px);
+  }
+  50% {
+    transform: scale(1.05, 0.95) translateY(0);
+  }
+  57% {
+    transform: scale(1, 1) translateY(-7px);
+  }
+  64% {
+    transform: scale(1, 1) translateY(0);
+  }
+  100% {
+    transform: scale(1, 1) translateY(0);
+  }
 }
 
 .scores_comment {
-  font-size: 2.5rem;
+  margin: auto;
+  font-size: 2rem;
+  color: rgb(48, 42, 48);
+}
+
+.scores_button {
+  margin-bottom: 1rem;
+  letter-spacing: 2px;
+  background-color: hwb(300 14% 45%);
+  color: white;
+}
+
+@media screen and (min-width: 1024px) {
+  .questionnaire_container {
+    height: 30vh;
+  }
+  .questionnaire_question {
+    width: 700px;
+    margin-top: 3rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .questionnaire_question {
+    font-size: 1.5rem;
+  }
+
+  .answer {
+    height: 35vh;
+  }
 }

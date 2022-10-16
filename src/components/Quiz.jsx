@@ -58,6 +58,8 @@ function Quiz(props) {
     setStart(false);
   };
 
+  console.log(answer);
+
   return (
     <div className="quiz">
       {!loading && (
@@ -89,7 +91,16 @@ function Quiz(props) {
                   />
                 </div>
               )}
-              {isSubmitted && <Scores answer={answer} limitation={limit} />}
+              {isSubmitted && (
+                <Scores
+                  answer={answer}
+                  limitation={limit}
+                  setStart={setStart}
+                  setSubmit={setSubmit}
+                  setQuestionNumber={setQuestionNumber}
+                  setAnswer={setAnswer}
+                />
+              )}
             </div>
           )}
           <div className="button_container">

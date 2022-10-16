@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { app, database } from "../services/firebase";
+import { database } from "../services/firebase";
+import like_owl from "../assets/images/like_owl2.png";
+import cheer_owl from "../assets/images/cheer_owl2.png";
+
 import {
   collection,
   addDoc,
@@ -11,9 +14,17 @@ import {
 } from "firebase/firestore";
 
 function Scores(props) {
-  const { limitation, answer } = props;
+  const {
+    limitation,
+    answer,
+    setAnswer,
+    setStart,
+    setSubmit,
+    setQuestionNumber,
+  } = props;
   const [highestScore, setHighestScore] = useState([]);
   const [isDoneQuery, setDoneQuery] = useState(false);
+
   let scores = [];
   for (let [key, value] of Object.entries(answer)) {
     const { chosenAnswer, theCorrectAnswer } = value;
@@ -24,16 +35,18 @@ function Scores(props) {
     }
   }
 
+  const score = scores.length;
+  const DECIMAL = 10.5;
   useEffect(() => {
     try {
       addDoc(collection(database, "score"), {
-        highest_score: scores.length,
+        highest_score: score * DECIMAL,
         created: Timestamp.now(),
       });
     } catch (err) {
       alert(err);
     }
-  }, []);
+  }, [score]);
 
   useEffect(() => {
     const q = query(
@@ -46,7 +59,7 @@ function Scores(props) {
         setHighestScore({ id: doc.id, ...doc.data() });
       });
     });
-  }, [onSnapshot]);
+  }, []);
 
   useEffect(() => {
     setInterval(() => {
@@ -54,26 +67,49 @@ function Scores(props) {
     }, 500);
   }, []);
 
-  if (isDoneQuery) {
-    console.log(highestScore["highest_score"]);
+  let comment;
+  let passed = score >= limitation / 2;
+  passed
+    ? (comment = <h3 className="scores_comment">Nice shot!</h3>)
+    : (comment = <h3 className="scores_comment">Nice try!</h3>);
+
+  if (passed) {
+    let scoreOwl = document.querySelector(".score_owl");
+    scoreOwl.setAttrubute("width", "8rem");
   }
 
-  let comment;
-  if (scores.length >= limit / 2) {
-    comment = <h3 className="scores_comment">Congratulations!</h3>;
-  } else {
-    comment = <h3 className="scores_comment">HAHA Bobo!</h3>;
-  }
+  const retryQuiz = () => {
+    setAnswer([]);
+    setSubmit(false);
+    setStart(true);
+    setQuestionNumber(0);
+  };
 
   return (
-    <div className="scores">
-      <p className="scores_description">Total</p>
-      <h2 className="scores_total">{scores.length}</h2>
-      <hr />
-      <h2 className="scores_total"> {limitation}</h2>
-      {comment}
-      {isDoneQuery && <h4>Top Score: {highestScore["highest_score"]}</h4>}
-    </div>
+    <>
+      <div className="scores">
+        <div className="scores_container">
+          <p className="scores_description">Total Score</p>
+          <h2 className="scores_total">{score}</h2>
+          <hr />
+          <h2 className="scores_total"> {limitation}</h2>{" "}
+        </div>
+        <div className="score_image">
+          <img
+            src={passed ? cheer_owl : like_owl}
+            alt="like_owl"
+            className="score_owl"
+          />
+        </div>
+        {comment}
+        {isDoneQuery && <h4>Your Points: {highestScore["highest_score"]}</h4>}
+        <div className="button_container">
+          <button className=" scores_button" onClick={retryQuiz}>
+            Start again
+          </button>
+        </div>
+      </div>
+    </>
   );
 }
 
