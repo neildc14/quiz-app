@@ -6,7 +6,7 @@ import Submit from "./Submit";
 import Scores from "./Scores";
 
 function Quiz(props) {
-  const { selectedCategory, difficulty, limit, selectedTags, setStart } = props;
+  const { selectedCategory, difficulty, limit, selectedTags, setStart, } = props;
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isFirstQuestion, setFirstQuestion] = useState(true);

@@ -20,8 +20,6 @@ function Question(props) {
   useEffect(() => {
     let answerChoice = document.querySelectorAll(".answer_choice");
     answerChoice.forEach((choice) => {
-      console.log(choice);
-      console.log(questionNumber);
       let valueLength = choice.value.length;
       if (valueLength >= 20) {
         choice.classList.add("answer_choice-wrapped");

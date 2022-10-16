@@ -12,6 +12,7 @@ export const CategoriesContext = React.createContext();
 export const DifficultiesContext = React.createContext();
 export const LimitContext = React.createContext();
 export const TagsContext = React.createContext();
+export const ScoreContext = React.createContext();
 
 function QuizComponent() {
   const [loading, setLoading] = useState(true);
@@ -25,6 +26,8 @@ function QuizComponent() {
   const [selectedTags, setSelectedTags] = useState([]);
   const [start, setStart] = useState(false);
   const [error, setError] = useState("");
+  const [previousScore, setPreviousScore] = useState(null);
+  const [firstTry, setFirstTry] = useState(true);
 
   const CATEGORIES_URL =
     process.env.REACT_APP_CATEGORIES_URL ??
@@ -109,13 +112,18 @@ function QuizComponent() {
         </div>
       ) : (
         <Suspense>
-          <Quiz
-            selectedCategory={selectedCategory}
-            difficulty={difficulty}
-            limit={limit}
-            selectedTags={selectedTags}
-            setStart={setStart}
-          />
+          <ScoreContext.Provider
+            value={{ previousScore, setPreviousScore, firstTry, setFirstTry }}
+          >
+            {" "}
+            <Quiz
+              selectedCategory={selectedCategory}
+              difficulty={difficulty}
+              limit={limit}
+              selectedTags={selectedTags}
+              setStart={setStart}
+            />
+          </ScoreContext.Provider>
         </Suspense>
       )}
     </>

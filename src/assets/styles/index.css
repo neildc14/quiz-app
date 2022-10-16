@@ -52,6 +52,11 @@ header {
   margin-top: 3rem;
 }
 
+button,
+input[type="button"] {
+  transition: all 0.2s ease-in-out;
+}
+
 .image_logo {
   height: 5rem;
   width: 5rem;
@@ -447,7 +452,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   color: white;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 992px) {
   .questionnaire_container {
     height: 30vh;
   }
@@ -464,5 +469,9 @@ input[type="range"]::-webkit-slider-runnable-track {
 
   .answer {
     height: 35vh;
+  }
+
+  .answer_choice {
+    width: 350px;
   }
 }
