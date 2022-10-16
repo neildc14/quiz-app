@@ -14,7 +14,7 @@ function Difficulties(props) {
         className="difficulties_button option_button"
         onClick={() => setHidden(!isHidden)}
       >
-        Select Difficulties
+        Select Difficulty
         <span className="material-symbols-outlined button_arrow">
           chevron_right
         </span>

@@ -24,6 +24,7 @@ function QuizComponent() {
   const [limit, setLimit] = useState(5);
   const [tagsFromAPI, setTagsFromAPI] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [displayIcon, setDisplayIcon] = useState(false);
   const [start, setStart] = useState(false);
   const [error, setError] = useState("");
   const [previousScore, setPreviousScore] = useState(null);
@@ -61,6 +62,8 @@ function QuizComponent() {
   }, [TAGS_URL]);
 
   const startQuiz = () => {
+    setPreviousScore(null);
+    setFirstTry(true);
     setStart(true);
   };
 

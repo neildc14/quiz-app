@@ -33,6 +33,7 @@
 @font-face {
   font-family: "Material Icons";
   font-display: block;
+  src: url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 }
 
 body {
@@ -115,9 +116,9 @@ input[type="button"] {
   color: white;
 }
 
-/* .button_arrow {
-  opacity: 0;
-} */
+.button_arrow {
+  font-display: block;
+}
 
 .select_options {
   z-index: 1000;
