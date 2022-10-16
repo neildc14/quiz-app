@@ -16,6 +16,7 @@ function Pagination(props) {
     }
     console.log(buttonLabel);
   }, [questionNumber]);
+  
   const nextQuestion = () => {
     if (questionNumber + 1 === questions.length) {
       setLastQuestion(true);

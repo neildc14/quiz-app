@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-// import { database } from "../services/firebase";
+import React, { useEffect, useContext } from "react";
 import like_owl from "../assets/images/like_owl2.png";
 import cheer_owl from "../assets/images/cheer_owl2.png";
 import { ScoreContext } from "../layouts/QuizComponent";
@@ -18,7 +17,6 @@ function Scores(props) {
   const { firstTry, setFirstTry } = scoreContext;
   const previousScore = scoreContext.previousScore;
   const setPreviousScore = scoreContext.setPreviousScore;
-  console.log(scoreContext.previousScore);
 
   let scores = [];
   for (let [key, value] of Object.entries(answer)) {

@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Question from "./Question";
 import Pagination from "./Pagination";
-import Submit from "./Submit";
+
 import Scores from "./Scores";
 
 function Quiz(props) {
-  const { selectedCategory, difficulty, limit, selectedTags, setStart, } = props;
+  const { selectedCategory, difficulty, limit, selectedTags, setStart } = props;
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isFirstQuestion, setFirstQuestion] = useState(true);
@@ -57,8 +57,6 @@ function Quiz(props) {
   const backToMenu = () => {
     setStart(false);
   };
-
-  console.log(answer);
 
   return (
     <div className="quiz">
