@@ -103,7 +103,7 @@ input[type="button"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 250px;
+  width: 270px;
   outline: none;
   border: none;
   padding: 0.5rem 1rem;
@@ -198,11 +198,10 @@ input[type="button"] {
 }
 
 .limit_input {
-  width: 250px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: 250px;
+  width: 270px;
   height: 7px;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 5px;
@@ -269,14 +268,14 @@ input[type="range"]::-webkit-slider-runnable-track {
   background-color: hwb(300 11% 59%);
 }
 .button_container {
-  width: 250px;
+  width: 270px;
   margin: 0 auto;
 }
 
 .back_button,
 .submit_button,
 .scores_button {
-  width: 250px;
+  width: 270px;
   height: 2rem;
   border-radius: 4.5rem;
   cursor: pointer;
@@ -308,7 +307,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 @media screen and (min-width: 442px) {
   .start_button,
   .back_button {
-    width: 250px;
+    width: 270px;
     border-radius: 4.5rem;
   }
 }
@@ -345,7 +344,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 }
 
 .answer_choice {
-  width: 250px;
+  width: 270px;
   padding: 0.6rem 0;
   border: 1px solid rgb(196, 68, 196);
   font-weight: 600;
@@ -370,7 +369,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 .pagination {
   display: flex;
   justify-content: space-between;
-  width: 250px;
+  width: 270px;
   margin: 1.7rem auto;
 }
 
@@ -403,7 +402,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   color: white;
 }
 .scores {
-  width: 250px;
+  width: 270px;
   z-index: 10 !important;
   text-align: center;
 }
