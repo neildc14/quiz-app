@@ -1,8 +1,9 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import SelectCategory from "./SelectCategory";
 import { CategoriesContext } from "../layouts/QuizComponent";
 
-function Categories() {
+function Categories(props) {
+  const { displayIcon } = props;
   const [isHidden, setHidden] = useState(true);
   const categoriesContext = useContext(CategoriesContext);
   const {
@@ -12,6 +13,11 @@ function Categories() {
     selectedCategory,
     setSelectedCategory,
   } = categoriesContext;
+
+  useEffect(() => {
+    let buttonArrow = document.querySelector(".button_arrow-categories");
+    window.addEventListener("load", displayIcon(buttonArrow));
+  }, [displayIcon]);
 
   const closeButton = () => {
     setHidden(true);
@@ -24,7 +30,7 @@ function Categories() {
         onClick={() => setHidden(!isHidden)}
       >
         Select Categories
-        <span className="material-symbols-outlined button_arrow">
+        <span className="material-symbols-outlined button_arrow button_arrow-categories">
           chevron_right
         </span>
       </button>

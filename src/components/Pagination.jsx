@@ -14,9 +14,8 @@ function Pagination(props) {
     if (questionNumber + 1 === questions.length) {
       setButtonLabel("SUBMIT");
     }
-    console.log(buttonLabel);
   }, [questionNumber]);
-  
+
   const nextQuestion = () => {
     if (questionNumber + 1 === questions.length) {
       setLastQuestion(true);

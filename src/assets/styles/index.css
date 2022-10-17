@@ -145,6 +145,8 @@ input[type="radio"] {
 }
 
 .button_arrow {
+  visibility: visible;
+  opacity: 1;
   font-display: block;
 }
 

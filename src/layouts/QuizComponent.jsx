@@ -24,7 +24,6 @@ function QuizComponent() {
   const [limit, setLimit] = useState(5);
   const [tagsFromAPI, setTagsFromAPI] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
-  const [displayIcon, setDisplayIcon] = useState(false);
   const [start, setStart] = useState(false);
   const [error, setError] = useState("");
   const [previousScore, setPreviousScore] = useState(null);
@@ -61,6 +60,15 @@ function QuizComponent() {
       });
   }, [TAGS_URL]);
 
+  const displayIcon = (className) => {
+    let interval = setInterval(() => {
+      className.style.visibility = "hidden";
+      className.style.opacity = "0";
+    }, 4000);
+
+    clearInterval(interval);
+  };
+
   const startQuiz = () => {
     setPreviousScore(null);
     setFirstTry(true);
@@ -82,13 +90,13 @@ function QuizComponent() {
                   setSelectedCategory,
                 }}
               >
-                <Categories />
+                <Categories displayIcon={displayIcon} />
               </CategoriesContext.Provider>
 
               <DifficultiesContext.Provider
                 value={{ difficulty, setDifficulty }}
               >
-                <Difficulties />
+                <Difficulties displayIcon={displayIcon} />
               </DifficultiesContext.Provider>
 
               <LimitContext.Provider value={{ limit, setLimit }}>
@@ -103,7 +111,7 @@ function QuizComponent() {
                   setSelectedTags,
                 }}
               >
-                <Tags />
+                <Tags displayIcon={displayIcon} />
               </TagsContext.Provider>
 
               {error !== "" ? <p className="error_message">{error}</p> : null}

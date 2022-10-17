@@ -23,7 +23,6 @@ function Question(props) {
       let valueLength = choice.value.length;
       if (valueLength >= 20) {
         choice.classList.add("answer_choice-wrapped");
-        console.log(valueLength);
       } else if (valueLength >= 30) {
         choice.scroll.cssText = "font-size: .5rem";
       }
