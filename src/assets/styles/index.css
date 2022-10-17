@@ -5,6 +5,25 @@
 
 :root {
   --roboto: "Roboto", sans-serif;
+  --white: rgb(255, 255, 255);
+  --beluga: rgb(241, 241, 241);
+  --white-six: rgba(255, 255, 255, 0.6);
+  --sunny-pavement: rgb(217, 214, 217);
+  --distilled-rose: rgb(255, 180, 255);
+  --mamie-pink: rgb(238, 130, 238);
+  --size-purple: rgb(196, 68, 196);
+  --lavender-magenta: rgb(237, 130, 237);
+  --steel-pink: rgb(204, 44, 204);
+  --acai-juice: rgb(139, 35, 139);
+  --acai-juice-two: rgb(140, 36, 140);
+  --mithril: rgb(135, 135, 135);
+  --stone-cold: rgb(85, 85, 85);
+  --stone-cold: rgb(85, 85, 85);
+  --violaceous-greti: rgb(133, 18, 133);
+  --blackest-berry: rgb(105, 28, 105);
+  --opulent-purple: rgb(99, 52, 99);
+  --royal-coronation: rgb(64, 49, 66);
+  --moonless-night: rgb(48, 42, 48);
 }
 
 ::selection {
@@ -21,14 +40,15 @@
   width: 7px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: var(--beluga);
 }
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--mithril);
   border-radius: 10px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--stone-cold);
 }
 
 @font-face {
@@ -65,6 +85,10 @@ input[type="button"] {
   transition: all 0.2s ease-in-out;
 }
 
+input[type="radio"] {
+  transition: all 0.7s ease;
+}
+
 .image_logo {
   height: 5rem;
   width: 5rem;
@@ -76,7 +100,7 @@ input[type="button"] {
   font-family: cursive, var(--roboto);
   font-size: 3rem;
   font-weight: 800;
-  color: rgb(139, 35, 139) !important;
+  color: var(--acai-juice) !important;
 }
 
 .error_message {
@@ -108,7 +132,7 @@ input[type="button"] {
   border: none;
   padding: 0.5rem 1rem;
   font-weight: 600;
-  background-color: violet;
+  background-color: var(--mamie-pink);
   cursor: pointer;
 }
 
@@ -116,8 +140,8 @@ input[type="button"] {
 .option_button:focus,
 .option_button:visited,
 .option_button:hover {
-  background-color: rgb(99, 52, 99);
-  color: white;
+  background-color: var(--opulent-purple);
+  color: var(--white);
 }
 
 .button_arrow {
@@ -133,7 +157,7 @@ input[type="button"] {
   width: 100%;
   max-width: 220px;
   padding: 0.5rem 1rem;
-  background-color: rgb(255, 180, 255);
+  background-color: var(--distilled-rose);
   transition: all 0.5s ease-in;
 }
 
@@ -174,7 +198,7 @@ input[type="button"] {
   width: 100%;
   margin-bottom: 0.5rem;
   border: none;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--white);
   outline: none;
   background-color: transparent;
   font-size: 1.2rem;
@@ -184,12 +208,12 @@ input[type="button"] {
 .select_button:focus,
 .select_button:hover,
 .option_button:visited {
-  border-bottom: 1px solid rgb(99, 52, 99);
+  border-bottom: 1px solid var(--opulent-purple);
 }
 
 .selected_difficulty,
 .selected_tag {
-  border-bottom: 1px solid rgb(99, 52, 99);
+  border-bottom: 1px solid var(--opulent-purple);
 }
 
 .limit {
@@ -203,9 +227,12 @@ input[type="button"] {
   appearance: none;
   width: 270px;
   height: 7px;
-  background: rgba(255, 255, 255, 0.6);
+  background: var(--white-six);
   border-radius: 5px;
-  background-image: linear-gradient(#ee82ee, #ee82ee);
+  background-image: linear-gradient(
+    var(--lavender-magenta),
+    var(--lavender-magenta)
+  );
   background-repeat: no-repeat;
 }
 
@@ -216,9 +243,9 @@ input[type="range"]::-webkit-slider-thumb {
   height: 20px;
   width: 20px;
   border-radius: 50%;
-  background: rgb(139, 35, 139);
+  background: var(--acai-juice);
   cursor: ew-resize;
-  box-shadow: 0 0 2px 0 #555;
+  box-shadow: 0 0 2px 0 var(--stone-cold);
   transition: background 0.3s ease-in-out;
 }
 
@@ -234,7 +261,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
   font-weight: 800;
-  color: hwb(300 14% 45%);
+  color: var(--acai-juice-two);
 }
 
 .start_button {
@@ -246,8 +273,8 @@ input[type="range"]::-webkit-slider-runnable-track {
   padding: 0.5rem 1rem;
   cursor: pointer;
   text-align: center !important;
-  background-color: hwb(300 14% 45%);
-  color: white;
+  background-color: var(--acai-juice-two);
+  color: var(--white);
   font-size: 1.5rem;
 }
 
@@ -264,8 +291,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 .scores_button:hover,
 .scores_button:focus,
 .scores_button:visited {
-  color: white;
-  background-color: hwb(300 11% 59%);
+  color: var(--white);
+  background-color: var(--blackest-berry);
 }
 .button_container {
   width: 270px;
@@ -286,7 +313,7 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 .back_button {
   padding-top: 2px;
-  border: 1px solid hwb(300 84% 15%);
+  border: 1px solid var(--sunny-pavement);
 }
 
 .back_button-show {
@@ -295,8 +322,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 .submit_button {
   font-weight: 700;
-  background-color: hwb(300 14% 45%);
-  color: white;
+  background-color: var(--acai-juice-two);
+  color: var(--white);
 }
 @media screen and (max-width: 442px) {
   .start_button {
@@ -328,10 +355,12 @@ input[type="range"]::-webkit-slider-runnable-track {
 .questionnaire_number {
   margin: 0 auto;
   text-align: center;
+  color: var(--royal-coronation);
 }
 .questionnaire_question {
   padding: 1rem;
   text-align: center;
+  color: var(--royal-coronation);
 }
 
 .answer {
@@ -346,8 +375,9 @@ input[type="range"]::-webkit-slider-runnable-track {
 .answer_choice {
   width: 270px;
   padding: 0.6rem 0;
-  border: 1px solid rgb(196, 68, 196);
+  border: 1px solid var(--size-purple);
   font-weight: 600;
+  color: var(--royal-coronation);
   cursor: pointer;
 }
 
@@ -362,8 +392,8 @@ input[type="range"]::-webkit-slider-runnable-track {
 .answer_choice:focus,
 .answer_choice:visited,
 .selected_answer {
-  background-color: rgb(204, 44, 204);
-  color: white;
+  background-color: var(--steel-pink);
+  color: var(--white);
 }
 
 .pagination {
@@ -398,8 +428,8 @@ input[type="range"]::-webkit-slider-runnable-track {
   padding: 3rem;
   z-index: 100;
   border-radius: 0 0 30px 30px;
-  background: rgb(133, 18, 133);
-  color: white;
+  background: var(--violaceous-greti);
+  color: var(--white);
 }
 .scores {
   width: 270px;
@@ -458,14 +488,14 @@ input[type="range"]::-webkit-slider-runnable-track {
 .scores_comment {
   margin: auto;
   font-size: 2rem;
-  color: rgb(48, 42, 48);
+  color: var(--moonless-night);
 }
 
 .scores_button {
   margin-bottom: 1rem;
   letter-spacing: 2px;
-  background-color: hwb(300 14% 45%);
-  color: white;
+  background-color: var(--acai-juice-two);
+  color: var(--white);
 }
 
 @media screen and (min-width: 992px) {
