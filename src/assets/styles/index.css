@@ -10,14 +10,13 @@
   --white-six: rgba(255, 255, 255, 0.6);
   --sunny-pavement: rgb(217, 214, 217);
   --distilled-rose: rgb(255, 180, 255);
-  --mamie-pink: rgb(238, 130, 238);
-  --size-purple: rgb(196, 68, 196);
   --lavender-magenta: rgb(237, 130, 237);
+  --mamie-pink: rgb(238, 130, 238);
+  --mithril: rgb(135, 135, 135);
+  --size-purple: rgb(196, 68, 196);
   --steel-pink: rgb(204, 44, 204);
   --acai-juice: rgb(139, 35, 139);
   --acai-juice-two: rgb(140, 36, 140);
-  --mithril: rgb(135, 135, 135);
-  --stone-cold: rgb(85, 85, 85);
   --stone-cold: rgb(85, 85, 85);
   --violaceous-greti: rgb(133, 18, 133);
   --blackest-berry: rgb(105, 28, 105);
@@ -347,10 +346,10 @@ input[type="range"]::-webkit-slider-runnable-track {
   overflow-y: scroll;
 }
 
-.quiz_no_quiz{
-  height:80vh;
-  margin-top:5vh;
-  text-align:center;
+.quiz_no_quiz {
+  height: 80vh;
+  margin-top: 5vh;
+  text-align: center;
 }
 
 .questionnaire {
