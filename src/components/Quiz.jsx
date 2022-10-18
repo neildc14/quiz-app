@@ -63,7 +63,7 @@ function Quiz(props) {
       {!loading && (
         <div>
           {questions.length === 0 ? (
-            <div>No quiz found. Try new category</div>
+            <div className="quiz_no_quiz">No quiz found. Try again.</div>
           ) : (
             <div>
               {!isSubmitted && (

@@ -347,6 +347,12 @@ input[type="range"]::-webkit-slider-runnable-track {
   overflow-y: scroll;
 }
 
+.quiz_no_quiz{
+  height:80vh;
+  margin-top:5vh;
+  text-align:center;
+}
+
 .questionnaire {
   margin-top: 5vh;
 }
